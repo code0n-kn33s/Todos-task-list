@@ -1,0 +1,117 @@
+.checkbox_block
+  margin-top: 10px
+  position: relative 
+
+.checkbox_block_link
+  float: right
+  line-height: 20px
+  color: black
+  position: relative
+  z-index: 10
+  -webkit-transition: .2s
+  -o-transition: .2s
+  -moz-transition: .2s
+  transition: .2s 
+
+.checkbox_block_link:hover
+  cursor: pointer
+  color: lightgrey
+  -webkit-transition: .2s
+  -o-transition: .2s
+  -moz-transition: .2s
+  transition: .2s 
+
+.checkbox_block_text
+  display: inline-block 
+
+.checkbox_block_text a
+  color: green
+  cursor: pointer
+  -webkit-transition: .2s
+  -o-transition: .2s
+  -moz-transition: .2s
+  transition: .2s 
+
+.checkbox_block_text a:hover
+  color: grey
+  -webkit-transition: .2s
+  -o-transition: .2s
+  -moz-transition: .2s
+  transition: .2s 
+
+.checkbox_block .label
+  -webkit-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+          user-select: none
+  cursor: pointer
+  margin-bottom: 0
+  font-size: 18px
+  position: relative
+  padding-left: 20px 
+
+.checkbox_block label
+  cursor: pointer 
+
+.checkbox_block label input:checked + .checkbox
+  border-color: #3f9e59 
+
+.checkbox_block label input:checked + .checkbox svg path
+  fill: #fff 
+
+.checkbox_block label input:checked + .checkbox svg polyline
+  stroke-dashoffset: 0 
+
+.checkbox_block label:hover .checkbox svg path
+  stroke-dashoffset: 0 
+
+.checkbox_block .checkbox
+  display: inline-block
+  vertical-align: middle
+  position: relative
+  margin-right: 8px
+  width:  20px
+  height: 20px
+  margin-left: 5px
+  border: 2px solid lightgrey
+  -webkit-border-radius: 3px
+          border-radius: 3px
+  cursor: pointer 
+
+.checkbox_block .checkbox svg
+  position: absolute
+  top: -2px
+  left: -2px 
+
+.checkbox_block .checkbox svg path
+  fill: none
+  stroke: #3f9e59
+  stroke-width: 2
+  stroke-linecap: round
+  stroke-linejoin: round
+  stroke-dasharray: 71px
+  stroke-dashoffset: 71px
+  -webkit-transition: all .6s ease
+  -o-transition: all .6s ease
+  -moz-transition: all .6s ease
+  transition: all .6s ease 
+
+.checkbox_block .checkbox svg polyline
+  fill: none
+  stroke: #3f9e59
+  stroke-width: 2
+  stroke-linecap: round
+  stroke-linejoin: round
+  stroke-dasharray: 18px
+  stroke-dashoffset: 18px
+  -webkit-transition: all .3s ease
+  -o-transition: all .3s ease
+  -moz-transition: all .3s ease
+  transition: all .3s ease 
+
+.checkbox_block .invisible
+  position: absolute
+  z-index: -1
+  width: 0
+  height: 0
+  opacity: 0 
