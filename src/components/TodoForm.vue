@@ -1,24 +1,29 @@
 <template lang="pug">
   .todo-form
-    .form.clearfix
-      .form-item
-        span Name task
-        input(type="text" placeholder="Text input" v-focus)
-      .form-item
-        span Name project
-        input(type="text" placeholder="Text input")
-      .form-item.select
-        select
-          option(value="1") 1
-          option(value="2") 2
-          option(value="3") 3
-          option(value="4") 4
-      .form-item.textarea
-        span Deskription
-        textarea(rows="4" cols="20" wrap="hard" placeholder="Text area")
-      .form-submit
-        button.save.btn(type="submit") Save changes
-        button.cancel.btn(@click="$emit('add')") Cancel 
+    form(@submit="checkForm" action="/something" method="post")
+      .form.clearfix
+        p.form-errors(v-if="errors.length")
+          b.form-errors-title Please correct the following error(s):
+          ul.form-errors-list
+            li.form-errors-item(v-for="error in errors") {{ error }}
+        .form-item
+          span Name task
+          input(type="text" placeholder="Text input" name="title" id="title" v-model="title" v-focus)
+        .form-item
+          span Name project
+          input(type="text" placeholder="Text input" name="project" id="project" v-model="project")
+        .form-item.select
+          select(name="priority" id="priority" v-model="priority")
+            option(value="1") 1
+            option(value="2") 2
+            option(value="3") 3
+            option(value="4") 4
+        .form-item.textarea(name="description" id="description" v-model="description")
+          span Deskription
+          textarea(rows="4" cols="20" wrap="hard" placeholder="Text area")
+        .form-submit
+          button.save.btn(type="submit" value="Submit") Save changes
+          button.cancel.btn(@click="$emit('add')") Cancel 
 </template>
 <script>
 export default {
@@ -33,6 +38,25 @@ export default {
       inserted: function (el) {
         el.focus()
       }
+    }
+  },
+  data () {
+    return {
+      errors:[],
+      title:null,
+      project:null,
+      priority:1,
+      description:null
+    }
+  },
+  methods:{
+    checkForm:function(e) {
+      if(this.title && this.project && this.description) return true;
+      this.errors = [];
+      if(!this.title) this.errors.push("Task required.");
+      if(!this.project) this.errors.push("Project required.");
+      if(!this.description) this.errors.push("Description required.");
+      e.preventDefault();
     }
   }
 }
@@ -54,7 +78,7 @@ export default {
         border-radius: 5px
         width: 300px
         font-size: 18px
-        padding: 5px
+        padding: 10px
         border-color: gray
     &.select
       select
@@ -69,7 +93,7 @@ export default {
       display: inline-block
       width: 300px
       border-radius: 5px
-      padding: 0 5px
+      padding: 0 10px
       font-size: 18px
       font-family: 'Comic'
       color: dimgray
@@ -80,6 +104,17 @@ export default {
       display: inline-block
     .save
       margin-right: 30px
-
+  .form-errors
+    display: flex
+    justify-content: space-between
+    margin-bottom: 15px
+  .form-errors-title
+    text-decoration: underline
+    font-size: 18px
+  .form-errors-item
+    list-style: square
+    color: crimson
+    font-size: 18px
+    margin-bottom: 5px
 </style>
 

@@ -32,14 +32,16 @@ export default {
         {
           id: nextTodoId++,
           title: 'Learn Vue',
+          project: 'Project 1',
           priority: 1,
-          project: 'Project 1'
+          description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. At aliquam ipsa blanditiis ea delectus, et numquam non, eos, fuga. Porro.'
 				},
 				{
 					id: nextTodoId++,
           title: 'Learn about single-file components',
+          project: 'Project 2',
           priority: 2,
-          project: 'Project 2'
+          description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. At aliquam ipsa blanditiis ea delectus, et numquam non, eos, fuga. Porro.'
 				}
 			]
     }
@@ -62,9 +64,6 @@ export default {
 			this.todos = this.todos.filter(todo => {
 				return todo.id !== idToRemove
 			})
-    },
-    selectProject () {
-      console.log(this);
     }
 	}
 }

@@ -8,8 +8,7 @@
         .todo-item-priority-title Priority:
           span.todo-item-priority-value {{ todo.priority }}
       transition(name="bounce")
-        .todo-item-hidden-text(v-show='isShow').
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. At aliquam ipsa blanditiis ea delectus, et numquam non, eos, fuga. Porro.
+        .todo-item-hidden-text(v-show='isShow') {{ todo.description }}
       .todo-item-props
         button.todo-item-props-change.btn(@click="$emit('add')") Change
         button.todo-item-props-close.btn(@click="$emit('remove', todo.id)") Close
