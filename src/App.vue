@@ -18,6 +18,7 @@
 <style lang="sass">
   @import './style/assets/reset.sass'
   @import './style/assets/fonts.sass'
+  @import './style/assets/animation.sass'
   @import './style/elems/checkbox.sass'
   @import './style/elems/radio.sass'
   @import './style/common.sass'

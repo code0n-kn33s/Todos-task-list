@@ -1,9 +1,9 @@
 <template lang="pug">
   .todo-form
-    form.clearfix
+    .form.clearfix
       .form-item
         span Name task
-        input(type="text" placeholder="Text input")
+        input(type="text" placeholder="Text input" v-focus)
       .form-item
         span Name project
         input(type="text" placeholder="Text input")
@@ -15,28 +15,47 @@
           option(value="4") 4
       .form-item.textarea
         span Deskription
-        input(type="textarea" placeholder="Text area")
+        textarea(rows="4" cols="20" wrap="hard" placeholder="Text area")
       .form-submit
         button.save.btn(type="submit") Save changes
-        button.cancel.btn Cancel 
+        button.cancel.btn(@click="$emit('add')") Cancel 
 </template>
 <script>
 export default {
-  name: 'TodoForm'
+  name: 'TodoForm',
+  props: {
+    todo: {
+      type: Object
+    }
+  },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  }
 }
 </script>
 <style lang="sass">
   .todo-form
     border: 1px solid gray
     margin-top: 10px
-    form
+    .form
       padding: 10px 20px
   .form-item
     display: flex
     justify-content: flex-end
     margin-bottom: 10px
-    &.textarea
-      height: 100px
+    &.textarea  
+      textarea
+        font-family: 'Comic'
+        color: dimgray
+        border-radius: 5px
+        width: 300px
+        font-size: 18px
+        padding: 5px
+        border-color: gray
     &.select
       select
         font-family: 'Comic'

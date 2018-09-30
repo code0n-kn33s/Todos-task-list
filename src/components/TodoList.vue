@@ -3,10 +3,10 @@
     .todo-title Todo:
     .todo-wrap
       .todo-list(v-if="todos.length")
-        TodoItem(v-for="todo in todos" :key="todo.id" :todo="todo" @remove="removeTodo")
+        TodoItem(v-for="todo in todos" :key="todo.id" :todo="todo" @remove="removeTodo" @add="showTodoForm=!showTodoForm")
       p(v-else) Nothing left in the list. Add a new task.
-    TodoProps
-    //- TodoForm
+    TodoProps( v-if="showTodoForm" @add="showTodoForm=!showTodoForm")
+    TodoForm( v-else @add="showTodoForm=!showTodoForm")
 </template>
 
 <script>
@@ -17,6 +17,7 @@ import TodoForm from "./TodoForm";
 let nextTodoId = 1;
 
 export default {
+  name: 'TodoList',
   components: {
     TodoItem,
     TodoProps,
@@ -25,24 +26,28 @@ export default {
   name: 'TodoList',
   data () {
     return {
-			newTodoText: '',
+      newTodoText: '',
+      showTodoForm: true,
       todos: [
-				{
-					id: nextTodoId++,
-					text: 'Learn Vue'
+        {
+          id: nextTodoId++,
+          title: 'Learn Vue',
+          priority: 1,
+          project: 'Project 1'
 				},
 				{
 					id: nextTodoId++,
-					text: 'Learn about single-file components'
-				},
-				{
-					id: nextTodoId++,
-					text: 'Fall in love'
+          title: 'Learn about single-file components',
+          priority: 2,
+          project: 'Project 2'
 				}
 			]
     }
   },
   methods: {
+    openTodoForm () {
+      console.log(this.showTodoForm);
+    },
 		addTodo () {
 			const trimmedText = this.newTodoText.trim()
 			if (trimmedText) {
@@ -57,7 +62,10 @@ export default {
 			this.todos = this.todos.filter(todo => {
 				return todo.id !== idToRemove
 			})
-		}
+    },
+    selectProject () {
+      console.log(this);
+    }
 	}
 }
 </script>
