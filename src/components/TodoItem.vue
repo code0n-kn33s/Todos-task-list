@@ -13,7 +13,7 @@
       .todo-item-props
         button.todo-item-props-change.btn(@click="$emit('add')") Change
         button.todo-item-props-close.btn(@click="$emit('remove', todo.id)") Close
-        button.todo-item-props-expand.btn(@click='isShow=!isShow') Collapse
+        button.todo-item-props-expand.btn(@click='isShow=!isShow') {{!isShow?'Open':'Collapse'}}
 </template>
 
 <script>
