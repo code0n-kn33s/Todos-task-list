@@ -1,16 +1,16 @@
 <template lang="pug">
   #app
-    Todo
+    TodoList
 
 </template>
 
 <script>
-  import Todo from './components/Todo'
+  import TodoList from './components/TodoList'
 
   export default {
     name: 'app',
     components: {
-      Todo
+      TodoList
     }
   }
 </script>

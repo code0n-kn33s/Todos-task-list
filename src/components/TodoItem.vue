@@ -1,6 +1,6 @@
 <template lang="pug">
   .todo-item
-    .todo-item-title Title of the task
+    .todo-item-title {{todo.text}}
     .todo-item-proj.clearfix
       .todo-item-project-title Project:
         a.todo-item-project-link(href="#") Project!
@@ -10,39 +10,19 @@
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. At aliquam ipsa blanditiis ea delectus, et numquam non, eos, fuga. Porro.
     .todo-item-props
       button.todo-item-props-change.btn Change
-      button.todo-item-props-close.btn Close
+      button.todo-item-props-close.btn(@click="$emit('remove', todo.id)") Close
       button.todo-item-props-expand.btn Collapse
 </template>
 
 <script>
-  export default {
-    name: 'TodoItem',
-    props: {
-      title: Number
-    },
-    methods: {
-      collapseTodo () {
-        const trimmedText = this.newTodoText.trim()
-        if (trimmedText) {
-          this.todos.push({
-            id: nextTodoId++,
-            text: trimmedText
-          })
-          this.newTodoText = ''
-        }
-      },
-      removeTodo () {
-        const trimmedText = this.newTodoText.trim()
-        if (trimmedText) {
-          this.todos.push({
-            id: nextTodoId++,
-            text: trimmedText
-          })
-          this.newTodoText = ''
-        }
-      }
-	  }
+export default {
+  props: {
+    todo: {
+      type: Object,
+      required: true
+    }
   }
+}
 </script>
 
 <style lang="sass">
