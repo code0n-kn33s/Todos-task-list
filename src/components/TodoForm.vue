@@ -51,11 +51,17 @@ export default {
   },
   methods:{
     checkForm:function(e) {
-      if(this.title && this.project && this.description) return true;
       this.errors = [];
       if(!this.title) this.errors.push("Task required.");
       if(!this.project) this.errors.push("Project required.");
       if(!this.description) this.errors.push("Description required.");
+      const payload = {
+        title: this.title,
+        project: this.project,
+        description: this.description,
+        priority: this.priority,
+      };
+      if (!this.errors.length) this.$emit('add', payload);
       e.preventDefault();
     }
   }
