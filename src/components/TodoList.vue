@@ -6,7 +6,7 @@
         TodoItem(v-for="todo in todos" :key="todo.id" :todo="todo" @remove="removeTodo" @add="showTodoForm=!showTodoForm")
       p(v-else) Nothing left in the list. Add a new task.
     TodoProps( v-if="showTodoForm" @add="showTodoForm=!showTodoForm")
-    TodoForm( v-else @add="showTodoForm=!showTodoForm")
+    TodoForm( v-else @add="addTodo")
 </template>
 
 <script>
@@ -50,7 +50,8 @@ export default {
     openTodoForm () {
       console.log(this.showTodoForm);
     },
-		addTodo () {
+		addTodo (todo) {
+      console.log(todo);
 			const trimmedText = this.newTodoText.trim()
 			if (trimmedText) {
 				this.todos.push({
