@@ -18,12 +18,12 @@
             option(value="2") 2
             option(value="3") 3
             option(value="4") 4
-        .form-item.textarea(name="description" id="description" v-model="description")
+        .form-item.textarea
           span Deskription
-          textarea(rows="4" cols="20" wrap="hard" placeholder="Text area")
+          textarea(rows="4" cols="20" wrap="hard" placeholder="Text area" name="description" id="description" v-model="description")
         .form-submit
           button.save.btn(type="submit" value="Submit") Save changes
-          button.cancel.btn(@click="$emit('add')") Cancel 
+          .cancel.btn(@click="$emit('disableForm')") Cancel 
 </template>
 <script>
 export default {
@@ -43,10 +43,10 @@ export default {
   data () {
     return {
       errors:[],
-      title:null,
-      project:null,
+      title:'null',
+      project:'null',
       priority:1,
-      description:null
+      description:'null',
     }
   },
   methods:{
@@ -110,6 +110,8 @@ export default {
       display: inline-block
     .save
       margin-right: 30px
+    .cancel
+      display: inline-block
   .form-errors
     display: flex
     justify-content: space-between

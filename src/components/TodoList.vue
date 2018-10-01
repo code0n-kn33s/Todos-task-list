@@ -3,15 +3,37 @@
     .todo-title Todo:
     .todo-wrap
       .todo-list(v-if="todos.length")
-        TodoItem(v-for="todo in todos" :key="todo.id" :todo="todo" @remove="removeTodo" @add="showTodoForm=!showTodoForm")
+        TodoItem(v-for="todo in todos" :key="todo.id" :todo="todo" @remove="removeTodo" @showForm="showTodoForm=!showTodoForm")
       p(v-else) Nothing left in the list. Add a new task.
-    TodoProps( v-if="showTodoForm" @add="showTodoForm=!showTodoForm")
-    TodoForm( v-else @add="addTodo")
+    TodoForm(v-if="showTodoForm" @disableForm="showTodoForm=!showTodoForm" @add="addTodo")
+    .todo-props(v-else)
+      button.todo-props-create.btn(@click="showTodoForm=!showTodoForm") New task
+      .todo-props-sort.checkbox_block
+        .label
+          label(for="remember") By Priority
+            input#remember.invisible(type="checkbox")
+            .checkbox
+              svg(width="20px" height="20px" viewBox="0 0 20 20")
+                path(d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z")
+                polyline(points="4 11 8 15 16 6")
+      .todo-props-select.custom-select
+        button.select-group.btn(@click="showCard=!showCard") {{picked}}
+          span.triangle &#9660;
+        transition(name="fade")
+          ul.todo-props-select-list(v-show="showCard") 
+            li.todo-props-select-item
+              input(type="radio" name="proj-group" id="all-proj" value="All" checked="checked" v-model="picked")
+              label(for="all-proj") All
+            li.todo-props-select-item
+              input(type="radio" name="proj-group" id="proj1" value="Project1" v-model="picked")
+              label(for="proj1") Project 1
+            li.todo-props-select-item
+              input(type="radio" name="proj-group" id="proj2" value="Project2" v-model="picked")
+              label(for="proj2") Project 2
 </template>
 
 <script>
 import TodoItem from "./TodoItem";
-import TodoProps from "./TodoProps";
 import TodoForm from "./TodoForm";
 
 let nextTodoId = 1;
@@ -20,14 +42,14 @@ export default {
   name: 'TodoList',
   components: {
     TodoItem,
-    TodoProps,
     TodoForm
   },
-  name: 'TodoList',
   data () {
     return {
       newTodoText: '',
-      showTodoForm: true,
+      showCard: false,
+      showTodoForm: false,
+      picked: 'All',
       todos: [
         {
           id: nextTodoId++,
@@ -47,19 +69,15 @@ export default {
     }
   },
   methods: {
-    openTodoForm () {
-      console.log(this.showTodoForm);
-    },
 		addTodo (todo) {
-      console.log(todo);
-			const trimmedText = this.newTodoText.trim()
-			if (trimmedText) {
-				this.todos.push({
-					id: nextTodoId++,
-					text: trimmedText
-				})
-				this.newTodoText = ''
-			}
+      this.todos.push({
+        id: nextTodoId++,
+        title: todo.title,
+        project: todo.project,
+        priority: todo.priority,
+        description: todo.description
+      });
+      this.showTodoForm=true;
 		},
 		removeTodo (idToRemove) {
 			this.todos = this.todos.filter(todo => {
@@ -85,4 +103,24 @@ export default {
   border: 1px solid gray
   padding: 15px
   overflow-y: scroll
+.todo-props
+  display: flex
+  position: relative
+  margin-top: 10px
+  justify-content: space-between
+
+.todo-props-create
+  height: 40px
+
+.todo-props-select-list
+  position: absolute
+  right: 0
+  border: 1px solid gray
+  border-radius: 5px
+  padding: 5px 15px
+  margin-top: 5px
+
+.select-group .triangle
+  font-size: 10px
+  margin-left: 6px
 </style>
