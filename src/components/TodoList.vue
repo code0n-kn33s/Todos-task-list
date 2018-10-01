@@ -3,7 +3,7 @@
     .todo-title Todo:
     .todo-wrap
       .todo-list(v-if="todos.length")
-        TodoItem(v-for="todo in todos" :key="todo.id" :todo="todo" @remove="removeTodo" @changeForm="changeCurent" v-show="todo.visible")
+        TodoItem(v-for="todo in todos" :key="todo.id" :todo="todo" @remove="removeTodo" @changeForm="showTodoForm=!showTodoForm" v-show="todo.visible")
       p(v-else) Nothing left in the list. Add a new task.
     TodoForm(v-if="showTodoForm" @disableForm="showTodoForm=!showTodoForm" @add="addTodo")
     .todo-props(v-else)
@@ -80,13 +80,13 @@ export default {
 		addTodo (todo) {
       this.todos.push({
         id: nextTodoId++,
+        visible: true,
         title: todo.title,
         project: todo.project,
         priority: todo.priority,
         description: todo.description
       });
-      this.showTodoForm=true;
-
+      this.showTodoForm=false;
 		},
 		removeTodo (idToRemove) {
 			this.todos = this.todos.filter(todo => {
@@ -108,9 +108,6 @@ export default {
       this.todos.filter(todo => {
         todo.visible = true;
       });
-    },
-    changeCurent() {
-      console.log('change');
     }
   }
 }

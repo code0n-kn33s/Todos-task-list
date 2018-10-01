@@ -47,6 +47,7 @@ export default {
       project: null,
       priority:1,
       description: null,
+      visible: true
     }
   },
   methods:{
