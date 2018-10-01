@@ -10,9 +10,9 @@
       transition(name="bounce")
         .todo-item-hidden-text(v-show='isShow') {{ todo.description }}
       .todo-item-props
-        button.todo-item-props-change.btn(@click="$emit('showForm')") Change
-        button.todo-item-props-close.btn(@click="$emit('remove', todo.id)") Close
-        button.todo-item-props-expand.btn(@click='isShow=!isShow') {{!isShow?'Open':'Collapse'}}
+        button.todo-item-props-change.btn(@click="$emit('changeForm', todo.id)") Change
+        button.todo-item-props-close.btn(@click="$emit('remove', todo.id)") Remove
+        button.todo-item-props-expand.btn(@click='isShow=!isShow') {{!isShow?'Description':'Collapse'}}
 </template>
 
 <script>

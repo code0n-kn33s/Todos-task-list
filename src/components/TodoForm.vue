@@ -43,10 +43,10 @@ export default {
   data () {
     return {
       errors:[],
-      title:'null',
-      project:'null',
+      title: null,
+      project: null,
       priority:1,
-      description:'null',
+      description: null,
     }
   },
   methods:{
